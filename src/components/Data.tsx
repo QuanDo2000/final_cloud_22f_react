@@ -67,11 +67,11 @@ export default function Data() {
       <CssBaseline />
       <Box
         sx={{
-          marginTop: 4,
+          marginTop: 2,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          height: '85vh',
+          height: '90vh',
           width: '100%',
         }}
       >
