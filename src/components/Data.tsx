@@ -59,6 +59,7 @@ export default function Data() {
   }, [hshdNum]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setHshd(event.currentTarget.hshd_num.value);
   };
 
