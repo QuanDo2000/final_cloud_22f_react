@@ -19,13 +19,13 @@ export default function Header({
             <Link to="/" className={styles.headerA}>
               Home
             </Link>
-            <Link to="/dashboard" className={styles.headerA}>
+            <Link to={token ? '/dashboard' : '/'} className={styles.headerA}>
               Dashboard
             </Link>
           </div>
           {token && (
             <div className={styles.headerLeft}>
-              <div className={styles.headerA}>Hello, User</div>
+              <div className={styles.headerA}>Hello, {token}</div>
               <MuiLink
                 href="#"
                 className={styles.headerA}
