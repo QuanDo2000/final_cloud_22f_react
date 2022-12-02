@@ -1,0 +1,27 @@
+.headerUl {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.headerLeft {
+  display: flex;
+}
+
+.headerRight {
+  display: flex;
+}
+
+.headerA {
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  margin: 0 1rem;
+}
+
+.header {
+  padding: 0.2rem;
+  color: #fff;
+  background-color: #333;
+}
