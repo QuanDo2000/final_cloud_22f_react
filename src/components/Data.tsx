@@ -5,7 +5,8 @@ import Typography from '@mui/material/Typography';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 const columns: GridColDef[] = [
   { field: 'Hshd_num', headerName: 'Hshd_num' },
@@ -35,28 +36,33 @@ const columns: GridColDef[] = [
   { field: 'Children', headerName: 'Children' },
 ];
 
-export default function Data() {
+export default function Data({ custom }: { custom: boolean }) {
   const [hshdNum, setHshd] = useState(10);
   const [rows, setRows] = useState([{}]);
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    fetch(
-      `https://cloudfinalproject-backend.azurewebsites.net/pull/${hshdNum}`,
-      {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-    )
+
+    let url;
+    if (custom) {
+      url = `https://cloudfinalproject-backend.azurewebsites.net/tpull/${hshdNum}`;
+    } else {
+      url = `https://cloudfinalproject-backend.azurewebsites.net/pull/${hshdNum}`;
+    }
+
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
       .then((res) => res.json())
       .then((res) => {
         setRows(res.data);
         setLoading(false);
       });
-  }, [hshdNum]);
+  }, [hshdNum, custom]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -77,7 +83,7 @@ export default function Data() {
         }}
       >
         <Typography component="h1" variant="h4">
-          Data Pull
+          {custom ? 'Custom' : ''} Data Pull
         </Typography>
         <Box
           component="form"
@@ -111,3 +117,7 @@ export default function Data() {
     </Container>
   );
 }
+
+Data.propTypes = {
+  custom: PropTypes.bool.isRequired,
+};

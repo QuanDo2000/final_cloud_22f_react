@@ -5,7 +5,7 @@ import {
   Typography,
   Skeleton,
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Bar,
   BarChart,
@@ -16,6 +16,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
+import PropTypes from 'prop-types';
 
 type Dashboard2 = {
   Children: string;
@@ -27,7 +28,7 @@ type Dashboard3 = {
   count: number;
 };
 
-export default function Dashboard() {
+export default function Dashboard({ custom }: { custom: boolean }) {
   const [data1, setData1] = useState([{}]);
   const [data2, setData2] = useState([{}]);
   const [data3, setData3] = useState([{}]);
@@ -38,7 +39,19 @@ export default function Dashboard() {
 
   useEffect(() => {
     setLoading1(true);
-    fetch(`https://cloudfinalproject-backend.azurewebsites.net/dashboard/1`, {
+
+    let url1, url2, url3;
+    if (custom) {
+      url1 = `https://cloudfinalproject-backend.azurewebsites.net/tdashboard/1`;
+      url2 = `https://cloudfinalproject-backend.azurewebsites.net/tdashboard/2`;
+      url3 = `https://cloudfinalproject-backend.azurewebsites.net/tdashboard/3`;
+    } else {
+      url1 = `https://cloudfinalproject-backend.azurewebsites.net/dashboard/1`;
+      url2 = `https://cloudfinalproject-backend.azurewebsites.net/dashboard/2`;
+      url3 = `https://cloudfinalproject-backend.azurewebsites.net/dashboard/3`;
+    }
+
+    fetch(url1, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -50,7 +63,7 @@ export default function Dashboard() {
         setLoading1(false);
       });
     setLoading2(true);
-    fetch(`https://cloudfinalproject-backend.azurewebsites.net/dashboard/2`, {
+    fetch(url2, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -75,7 +88,7 @@ export default function Dashboard() {
         setLoading2(false);
       });
     setLoading3(true);
-    fetch(`https://cloudfinalproject-backend.azurewebsites.net/dashboard/3`, {
+    fetch(url3, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -102,7 +115,7 @@ export default function Dashboard() {
         setData3(res.data);
         setLoading3(false);
       });
-  }, []);
+  }, [custom]);
 
   return (
     <Container component="main" maxWidth="xl">
@@ -244,3 +257,7 @@ export default function Dashboard() {
     </Container>
   );
 }
+
+Dashboard.propTypes = {
+  custom: PropTypes.bool.isRequired,
+};

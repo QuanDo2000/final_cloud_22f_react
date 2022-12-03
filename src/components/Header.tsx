@@ -7,9 +7,13 @@ import { Link as MuiLink } from '@mui/material';
 export default function Header({
   token,
   setToken,
+  custom,
+  setCustom,
 }: {
   token: string | null;
   setToken: (userToken: string | null) => void;
+  custom: boolean;
+  setCustom: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   return (
     <>
@@ -22,16 +26,40 @@ export default function Header({
             <Link to={token ? '/dashboard' : '/'} className={styles.headerA}>
               Dashboard
             </Link>
+            <Link
+              to={token ? (!custom ? '/import' : '/') : '/'}
+              className={styles.headerA}
+            >
+              {!custom ? 'Import' : 'Imported'}
+            </Link>
           </div>
           {token && (
             <div className={styles.headerLeft}>
               <div className={styles.headerA}>Hello, {token}</div>
+              {custom ? (
+                <MuiLink
+                  href="/"
+                  className={styles.headerA}
+                  marginX="1rem"
+                  color="#fff"
+                  onClick={() => {
+                    setCustom(false);
+                  }}
+                  underline="none"
+                >
+                  Remove Import
+                </MuiLink>
+              ) : (
+                <></>
+              )}
               <MuiLink
-                href="#"
+                href="/"
                 className={styles.headerA}
+                marginX="1rem"
                 color="#fff"
                 onClick={() => {
                   setToken(null);
+                  setCustom(false);
                 }}
                 underline="none"
               >
@@ -47,5 +75,8 @@ export default function Header({
 }
 
 Header.propTypes = {
-  token: PropTypes.string,
+  token: PropTypes.string.isRequired,
+  custom: PropTypes.bool.isRequired,
+  setToken: PropTypes.func.isRequired,
+  setCustom: PropTypes.func.isRequired,
 };
