@@ -144,8 +144,15 @@ export default function Import({
         </Typography>
         <Typography component="body" variant="body1">
           Please upload the files one at a time. A success message will be shown
-          if file is uploaded. It is assumed that the files have the same
-          format,
+          if file is uploaded.
+        </Typography>
+        <Typography component="body" variant="body1">
+          It is assumed that the files have the same format as the input files
+          from the project description (obtained from
+          8451_The_Complete_Journey_2_Sample.zip).
+        </Typography>
+        <Typography component="body" variant="body1">
+          This means that all column order are the same as sample file.
         </Typography>
         <Box
           sx={{
