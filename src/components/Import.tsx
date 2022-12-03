@@ -24,7 +24,7 @@ export default function Import({
   useEffect(() => {
     if (hshdUpload === 1 && prodUpload === 1 && tranUpload === 1) {
       fetch(
-        'http://cloudfinalproject-backend.azurewebsites.net/upload/finished'
+        'https://cloudfinalproject-backend.azurewebsites.net/upload/finished'
       ).then((res) => {
         if (res.status === 200) {
           setCustom(true);
@@ -56,7 +56,7 @@ export default function Import({
     };
 
     fetch(
-      `http://cloudfinalproject-backend.azurewebsites.net/upload/hshd`,
+      `https://cloudfinalproject-backend.azurewebsites.net/upload/hshd`,
       options
     ).then((res) => {
       if (res.status === 200) {
@@ -86,7 +86,7 @@ export default function Import({
     };
 
     fetch(
-      `http://cloudfinalproject-backend.azurewebsites.net/upload/product`,
+      `https://cloudfinalproject-backend.azurewebsites.net/upload/product`,
       options
     ).then((res) => {
       if (res.status === 200) {
@@ -116,7 +116,7 @@ export default function Import({
     };
 
     fetch(
-      `http://cloudfinalproject-backend.azurewebsites.net/upload/transaction`,
+      `https://cloudfinalproject-backend.azurewebsites.net/upload/transaction`,
       options
     ).then((res) => {
       if (res.status === 200) {
